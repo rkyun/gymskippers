@@ -5,5 +5,10 @@ export default defineSchema({
   skips: defineTable({
     user: v.string(),
     timestamp: v.number(),
+    cost: v.number(),
   }),
+  config: defineTable({
+    key: v.string(),
+    value: v.any(),
+  }).index("by_key", ["key"]),
 });

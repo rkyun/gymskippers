@@ -2,9 +2,7 @@ import { ConvexClient } from "convex/browser";
 import { api } from "../convex/_generated/api";
 
 const convex = new ConvexClient(import.meta.env.VITE_CONVEX_URL);
-const COST_PER_SKIP = 50;
 
-// DOM Elements
 const poolAmountEl = document.getElementById('pool-amount');
 const historyListEl = document.getElementById('history-list');
 
@@ -13,7 +11,7 @@ const userEls = {
         skips: document.getElementById('skips-jaroslav'),
         debt: document.getElementById('debt-jaroslav')
     },
-    "Michał": {
+    "Michal": {
         skips: document.getElementById('skips-michal'),
         debt: document.getElementById('debt-michal')
     },
@@ -34,47 +32,69 @@ function formatDate(timestamp) {
     });
 }
 
-// Real-time updates using watchQuery
-convex.watchQuery(api.skips.getStats, {}).onUpdate((stats) => {
-    if (!stats) return;
+convex.onUpdate(
+    api.skips.getStats,
+    {},
+    (stats) => {
+        if (!stats) return;
 
-    // Update Pool
-    poolAmountEl.textContent = stats.totalPool;
+        if (poolAmountEl) {
+            poolAmountEl.textContent = stats.totalPool || 0;
+        }
 
-    // Update User Stats
-    for (const user in userEls) {
-        if (stats[user]) {
-            const skips = stats[user].skips;
-            userEls[user].skips.textContent = skips;
-            userEls[user].debt.textContent = `${skips * COST_PER_SKIP} PLN`;
+        for (const userKey in userEls) {
+            if (stats[userKey] && userEls[userKey]) {
+                const skips = stats[userKey].skips || 0;
+                const totalCost = stats[userKey].totalCost !== undefined && stats[userKey].totalCost !== null 
+                    ? Number(stats[userKey].totalCost) 
+                    : 0;
+                
+                if (userEls[userKey].skips) {
+                    userEls[userKey].skips.textContent = skips;
+                }
+                if (userEls[userKey].debt) {
+                    userEls[userKey].debt.textContent = `${totalCost} PLN`;
+                }
+            }
         }
     }
-});
+);
 
-convex.watchQuery(api.skips.getRecent, {}).onUpdate((history) => {
-    if (!history) return;
+convex.onUpdate(
+    api.skips.getRecent,
+    {},
+    (history) => {
+        if (!history || !Array.isArray(history)) {
+            if (historyListEl) {
+                historyListEl.innerHTML = '';
+            }
+            return;
+        }
 
-    // Update History
-    historyListEl.innerHTML = '';
+        if (historyListEl) {
+            historyListEl.innerHTML = '';
 
-    history.forEach(entry => {
-        const item = document.createElement('div');
-        item.className = 'history-item';
-        item.innerHTML = `
-            <div>
-                <span class="history-user">${entry.user}</span>
-                <span style="color: #666; margin: 0 5px;">skipnął</span>
-            </div>
-            <div style="text-align: right;">
-                <div class="history-cost">+${COST_PER_SKIP} PLN</div>
-                <div class="history-date">${formatDate(entry.timestamp)}</div>
-            </div>
-        `;
-        historyListEl.appendChild(item);
-    });
-});
+            history.forEach(entry => {
+                if (!entry) return;
+                
+                const item = document.createElement('div');
+                item.className = 'history-item';
+                item.innerHTML = `
+                    <div>
+                        <span class="history-user">${entry.user || 'Unknown'}</span>
+                        <span style="color: #666; margin: 0 5px;">skipnął</span>
+                    </div>
+                    <div style="text-align: right;">
+                        <div class="history-cost">+${entry.cost || 0} PLN</div>
+                        <div class="history-date">${formatDate(entry.timestamp || Date.now())}</div>
+                    </div>
+                `;
+                historyListEl.appendChild(item);
+            });
+        }
+    }
+);
 
-// Expose addSkip to window so onclick works
 window.addSkip = async (user) => {
     await convex.mutation(api.skips.add, { user });
 };

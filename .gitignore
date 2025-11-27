@@ -127,3 +127,4 @@ dist-ssr
 Thumbs.db
 .vercel
 .env*.local
+.history
