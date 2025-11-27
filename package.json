@@ -15,5 +15,8 @@
     "convex": "^1.29.3",
     "dotenv": "^17.2.3",
     "vite": "^7.2.4"
+  },
+  "devDependencies": {
+    "sass-embedded": "^1.93.3"
   }
 }

@@ -10,32 +10,32 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;500;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/src/style.css">
+    <link rel="stylesheet" href="/src/style.scss">
 </head>
 
 <body>
     <div class="background-grid"></div>
     <div class="scanline"></div>
 
-    <div class="bg-decoration model-decoration">
+    <div class="bg-decoration bg-decoration--model">
         <img src="/assets/neon_fitness_model.png" alt="Neon Fitness Model">
     </div>
-    <div class="bg-decoration gear-decoration-1">
+    <div class="bg-decoration bg-decoration--gear-1">
         <img src="/assets/neon_gym_gear.png" alt="Neon Gym Gear">
     </div>
-    <div class="bg-decoration gear-decoration-2">
+    <div class="bg-decoration bg-decoration--gear-2">
         <img src="/assets/neon_gym_gear.png" alt="Neon Gym Gear">
     </div>
 
     <div class="container">
-        <header>
-            <h1 class="glitch" data-text="GYM SKIPPERS">GYM SKIPPERS</h1>
+        <header class="header">
+            <h1 class="header__title header__title--glitch" data-text="GYM SKIPPERS">GYM SKIPPERS</h1>
             <div class="pool-display">
-                <span class="pool-label">PULA KAR</span>
-                <span class="pool-subtitle">Na szaszłyki</span>
-                <div class="pool-amount-wrapper">
+                <span class="pool-display__label">PULA KAR</span>
+                <span class="pool-display__subtitle">Na szaszłyki</span>
+                <div class="pool-display__amount-wrapper">
                     <span id="pool-amount">0</span>
-                    <span class="currency">PLN</span>
+                    <span class="pool-display__currency">PLN</span>
                 </div>
             </div>
         </header>
@@ -44,80 +44,80 @@
             <div class="users-grid">
                 <!-- Jaroslav Card -->
                 <div class="user-card" id="card-jaroslav">
-                    <div class="card-border"></div>
-                    <div class="avatar-container">
-                        <div class="avatar jaroslav-avatar">J</div>
-                        <div class="status-ring"></div>
+                    <div class="user-card__border"></div>
+                    <div class="user-card__avatar-container">
+                        <div class="user-card__avatar">J</div>
+                        <div class="user-card__status-ring"></div>
                     </div>
-                    <h2>YAROSLAV</h2>
+                    <h2 class="user-card__title">YAROSLAV</h2>
                     <div class="stats">
-                        <div class="stat-item">
-                            <span class="stat-label">SKIPS</span>
-                            <span class="stat-value" id="skips-jaroslav">0</span>
+                        <div class="stats__item">
+                            <span class="stats__label">SKIPS</span>
+                            <span class="stats__value" id="skips-jaroslav">0</span>
                         </div>
-                        <div class="stat-item">
-                            <span class="stat-label">DEBT</span>
-                            <span class="stat-value" id="debt-jaroslav">0 PLN</span>
+                        <div class="stats__item">
+                            <span class="stats__label">DEBT</span>
+                            <span class="stats__value" id="debt-jaroslav">0 PLN</span>
                         </div>
                     </div>
                     <button class="skip-btn" onclick="addSkip('Yaroslav')">
-                        <span class="btn-content">SKIP DAY</span>
-                        <span class="btn-glitch"></span>
+                        <span class="skip-btn__content">SKIP DAY</span>
+                        <span class="skip-btn__glitch"></span>
                     </button>
                 </div>
 
                 <!-- Michał Card -->
                 <div class="user-card" id="card-michal">
-                    <div class="card-border"></div>
-                    <div class="avatar-container">
-                        <div class="avatar michal-avatar">M</div>
-                        <div class="status-ring"></div>
+                    <div class="user-card__border"></div>
+                    <div class="user-card__avatar-container">
+                        <div class="user-card__avatar">M</div>
+                        <div class="user-card__status-ring"></div>
                     </div>
-                    <h2>MICHAL</h2>
+                    <h2 class="user-card__title">MICHAL</h2>
                     <div class="stats">
-                        <div class="stat-item">
-                            <span class="stat-label">SKIPS</span>
-                            <span class="stat-value" id="skips-michal">0</span>
+                        <div class="stats__item">
+                            <span class="stats__label">SKIPS</span>
+                            <span class="stats__value" id="skips-michal">0</span>
                         </div>
-                        <div class="stat-item">
-                            <span class="stat-label">DEBT</span>
-                            <span class="stat-value" id="debt-michal">0 PLN</span>
+                        <div class="stats__item">
+                            <span class="stats__label">DEBT</span>
+                            <span class="stats__value" id="debt-michal">0 PLN</span>
                         </div>
                     </div>
                     <button class="skip-btn" onclick="addSkip('Michal')">
-                        <span class="btn-content">SKIP DAY</span>
-                        <span class="btn-glitch"></span>
+                        <span class="skip-btn__content">SKIP DAY</span>
+                        <span class="skip-btn__glitch"></span>
                     </button>
                 </div>
 
                 <!-- Valentyn Card -->
                 <div class="user-card" id="card-valentyn">
-                    <div class="card-border"></div>
-                    <div class="avatar-container">
-                        <div class="avatar valentyn-avatar">V</div>
-                        <div class="status-ring"></div>
+                    <div class="user-card__border"></div>
+                    <div class="user-card__avatar-container">
+                        <div class="user-card__avatar">V</div>
+                        <div class="user-card__status-ring"></div>
                     </div>
-                    <h2>VALENTYN</h2>
+                    <h2 class="user-card__title">VALENTYN</h2>
                     <div class="stats">
-                        <div class="stat-item">
-                            <span class="stat-label">SKIPS</span>
-                            <span class="stat-value" id="skips-valentyn">0</span>
+                        <div class="stats__item">
+                            <span class="stats__label">SKIPS</span>
+                            <span class="stats__value" id="skips-valentyn">0</span>
                         </div>
-                        <div class="stat-item">
-                            <span class="stat-label">DEBT</span>
-                            <span class="stat-value" id="debt-valentyn">0 PLN</span>
+                        <div class="stats__item">
+                            <span class="stats__label">DEBT</span>
+                            <span class="stats__value" id="debt-valentyn">0 PLN</span>
                         </div>
                     </div>
                     <button class="skip-btn" onclick="addSkip('Valentyn')">
-                        <span class="btn-content">SKIP DAY</span>
-                        <span class="btn-glitch"></span>
+                        <span class="skip-btn__content">SKIP DAY</span>
+                        <span class="skip-btn__glitch"></span>
                     </button>
                 </div>
             </div>
         </main>
 
         <section class="history-section">
-            <h3><span class="icon">⚡</span> LOG AKTYWNOŚCI</h3>
+            <h3 class="history-section__title"><span class="history-section__icon">⚡</span> LOG AKTYWNOŚCI</h3>
             <div class="history-list" id="history-list">
                 <!-- History items will be injected here -->
             </div>

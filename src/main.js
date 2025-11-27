@@ -81,12 +81,12 @@ convex.onUpdate(
                 item.className = 'history-item';
                 item.innerHTML = `
                     <div>
-                        <span class="history-user">${entry.user || 'Unknown'}</span>
+                        <span class="history-item__user">${entry.user || 'Unknown'}</span>
                         <span style="color: #666; margin: 0 5px;">skipnął</span>
                     </div>
                     <div style="text-align: right;">
-                        <div class="history-cost">+${entry.cost || 0} PLN</div>
-                        <div class="history-date">${formatDate(entry.timestamp || Date.now())}</div>
+                        <div class="history-item__cost">+${entry.cost || 0} PLN</div>
+                        <div class="history-item__date">${formatDate(entry.timestamp || Date.now())}</div>
                     </div>
                 `;
                 historyListEl.appendChild(item);
