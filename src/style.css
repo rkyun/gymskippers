@@ -272,8 +272,8 @@ h1 {
 /* Users Grid */
 .users-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 3rem;
+    grid-template-columns: repeat(3, minmax(220px, 1fr));
+    gap: 1.5rem;
     margin-bottom: 4rem;
 }
 
@@ -281,7 +281,7 @@ h1 {
     background: var(--bg-card);
     border: 1px solid var(--glass-border);
     border-radius: 16px;
-    padding: 2rem;
+    padding: 1.5rem;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -342,14 +342,6 @@ h1 {
 }
 
 /* Custom avatar colors for each user */
-.valentyn-avatar {
-    color: var(--neon-green) !important;
-    border-color: rgba(10, 255, 0, 0.3) !important;
-}
-
-.valentyn-avatar+.status-ring {
-    border-color: var(--neon-green);
-}
 
 
 @keyframes spin {
