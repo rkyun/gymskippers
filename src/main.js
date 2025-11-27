@@ -9,13 +9,17 @@ const poolAmountEl = document.getElementById('pool-amount');
 const historyListEl = document.getElementById('history-list');
 
 const userEls = {
-    "Jaroslav": {
+    "Yaroslav": {
         skips: document.getElementById('skips-jaroslav'),
         debt: document.getElementById('debt-jaroslav')
     },
     "Michał": {
         skips: document.getElementById('skips-michal'),
         debt: document.getElementById('debt-michal')
+    },
+    "Valentyn": {
+        skips: document.getElementById('skips-valentyn'),
+        debt: document.getElementById('debt-valentyn')
     }
 };
 
@@ -30,8 +34,8 @@ function formatDate(timestamp) {
     });
 }
 
-// Real-time updates
-convex.watchQuery(api.skips.getStats).onUpdate((stats) => {
+// Real-time updates using watchQuery
+convex.watchQuery(api.skips.getStats, {}).onUpdate((stats) => {
     if (!stats) return;
 
     // Update Pool
@@ -47,7 +51,7 @@ convex.watchQuery(api.skips.getStats).onUpdate((stats) => {
     }
 });
 
-convex.watchQuery(api.skips.getRecent).onUpdate((history) => {
+convex.watchQuery(api.skips.getRecent, {}).onUpdate((history) => {
     if (!history) return;
 
     // Update History

@@ -26,9 +26,10 @@ export const getStats = query({
   handler: async (ctx) => {
     const skips = await ctx.db.query("skips").collect();
     
-    const stats = {
-      "Jaroslav": { skips: 0 },
+    const stats: Record<string, { skips: number } | any> = {
+      "Yaroslav": { skips: 0 },
       "Michał": { skips: 0 },
+      "Valentyn": { skips: 0 },
       totalPool: 0
     };
 
@@ -39,7 +40,7 @@ export const getStats = query({
     });
 
     const COST_PER_SKIP = 50;
-    stats.totalPool = (stats["Jaroslav"].skips + stats["Michał"].skips) * COST_PER_SKIP;
+    stats.totalPool = (stats["Yaroslav"].skips + stats["Michał"].skips + stats["Valentyn"].skips) * COST_PER_SKIP;
 
     return stats;
   },
